@@ -1,0 +1,129 @@
+title: March 2022 CISA Conti Ransomware Domains Update
+id: 62e5b943-e0bb-449f-a44c-d08c61537a49
+description: The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has updated the alert on Conti ransomware with indicators of compromise (IoCs) consisting of 
+close to 100 domain names used in malicious operations.Originally published on September 22, 2021, the advisory includes details observed by CISA and the Federal Bureau of 
+Investigation (FBI) in Conti ransomware attacks targeting organizations in the U.S. The updated cybersecurity advisory contains data from the U.S. Secret Service.
+status: experimental
+references:
+  - https://www.bleepingcomputer.com/news/security/cisa-updates-conti-ransomware-alert-with-nearly-100-domain-names/
+  - https://www.cisa.gov/uscert/ncas/alerts/aa21-265a
+  date: 2022/3/10
+modified: 
+author: Michael Morgan, Booz Allen's Adversary Informed Defense Team // bah_aid@bah.com
+level: high
+logsource:
+    service: dns
+tags:
+  - attack.command_and_control
+  - attack.1071.004
+detection:
+    selection:
+        query:
+        - 'badiwaw.com' 
+        - 'balacif.com'
+        - 'barovur.com'
+        - 'basisem.com'
+        - 'bimafu.com'
+        - 'bujoke.com'
+        - 'buloxo.com'
+        - 'bumoyez.com'
+        - 'bupula.com'
+        - 'cajeti.com'
+        - 'cilomum.com'
+        - 'codasal.com'
+        - 'comecal.com'
+        - 'dawasab.com'
+        - 'derotin.com'
+        - 'dihata.com'
+        - 'dirupun.com'
+        - 'dohigu.com'
+        - 'dubacaj.com'
+        - 'fecotis.com'
+        - 'fipoleb.com'
+        - 'fofudir.com'
+        - 'fulujam.com'
+        - 'ganobaz.com'
+        - 'gerepa.com'
+        - 'gucunug.com' 
+        - 'guvafe.com'
+        - 'hakakor.com'
+        - 'hejalij.com'
+        - 'hepide.com'
+        - 'hesovaw.com'
+        - 'hewecas.com'
+        - 'hidusi.com'
+        - 'hireja.com'
+        - 'hoguyum.com'
+        - 'jecubat.com'
+        - 'jegufe.com'
+        - 'joxinu.com'
+        - 'kelowuh.com'
+        - 'kidukes.com'
+        - 'kipitep.com'
+        - 'kirute.com'
+        - 'kogasiv.com'
+        - 'kozoheh.com'
+        - 'kuxizi.com'
+        - 'kuyeguh.com'
+        - 'lipozi.com'
+        - 'lujecuk.com'
+        - 'masaxoc.com'
+        - 'mebonux.com'
+        - 'mihojip.com'
+        - 'modasum.com'
+        - 'moduwoj.com'
+        - 'movufa.com'
+        - 'nagahox.com'
+        - 'nawusem.com'
+        - 'nerapo.com'
+        - 'newiro.com'
+        - 'paxobuy.com'
+        - 'pazovet.com'
+        - 'pihafi.com'
+        - 'pilagop.com'
+        - 'pipipub.com'
+        - 'pofifa.com'
+        - 'radezig.com'
+        - 'raferif.com'
+        - 'ragojel.com'
+        - 'rexagi.com'
+        - 'rimurik.com'
+        - 'rinutov.com'
+        - 'rusoti.com'
+        - 'sazoya.com'
+        - 'sidevot.com'
+        - 'solobiv.com'
+        - 'sufebul.com'
+        - 'suhuhow.com'
+        - 'sujaxa.com'
+        - 'tafobi.com' 
+        - 'tepiwo.com'
+        - 'tifiru.com'
+        - 'tiyuzub.com'
+        - 'tubaho.com'
+        - 'vafici.com'
+        - 'vegubu.com'
+        - 'vigave.com'
+        - 'vipeced.com'
+        - 'vizosi.com'
+        - 'vojefe.com'
+        - 'vonavu.com'
+        - 'wezeriw.com'
+        - 'wideri.com'
+        - 'wudepen.com'
+        - 'wuluxo.com'
+        - 'wuvehus.com'
+        - 'wuvici.com'
+        - 'wuvidi.com'
+        - 'xegogiv.com'
+        - 'xekezix.com'
+   exclude_answers:
+        answers:
+            - ' '127.0.0.1'
+            - ' '0.0.0.0'
+    exclude_rejected:
+        rejected: 'true'
+    condition: selection and not (exclude_answers or exclude_rejected)
+falsepositives:
+    - ' A DNS lookup does not necessarily  mean a successful attempt, verify a) if there was a response using the zeek answers field, if there was then verify the connections (conn.log) to those IPs. b) verify if HTTP, SSL, or TLS activity to the domain that was queried. http.log field is 'host' and ssl/tls is 'server_name'.
+    - Analyst Testing
