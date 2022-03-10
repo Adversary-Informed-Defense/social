@@ -7,7 +7,7 @@ status: experimental
 references:
   - https://www.bleepingcomputer.com/news/security/cisa-updates-conti-ransomware-alert-with-nearly-100-domain-names/
   - https://www.cisa.gov/uscert/ncas/alerts/aa21-265a
-  date: 2022/3/10
+date: 2022/3/10
 modified: 
 author: Michael Morgan, Booz Allen's Adversary Informed Defense Team // bah_aid@bah.com
 level: high
@@ -125,5 +125,5 @@ detection:
         rejected: 'true'
     condition: selection and not (exclude_answers or exclude_rejected)
 falsepositives:
-    - ' A DNS lookup does not necessarily  mean a successful attempt, verify a) if there was a response using the zeek answers field, if there was then verify the connections (conn.log) to those IPs. b) verify if HTTP, SSL, or TLS activity to the domain that was queried. http.log field is 'host' and ssl/tls is 'server_name'.
+    - A DNS lookup does not necessarily  mean a successful attempt
     - Analyst Testing
