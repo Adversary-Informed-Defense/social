@@ -1,0 +1,44 @@
+title: HermeticWiper Persistence Using Run Keys
+id: a9d6e052-e7d6-4884-94a3-aeeba87176bc
+description: Analyze registry keys to build haystacks for pre-wiper or malware detection. Modified from Picus Security. 
+author: Booz Allen's Adversary Informed Defense Team // bah_aid@bah.com
+status: experimental
+references:
+    - https://www.picussecurity.com/resource/blog/picus-10-critical-mitre-attck-techniques-t1060-registry-run-keys-startup-folder
+    - https://docs.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys
+    - https://www.insane.net.au/articles/case-study/saigon-banking-trojan/
+    - https://www.welivesecurity.com/2020/08/13/mekotio-these-arent-the-security-updates-youre-looking-for/
+date: 11 MAR 2022
+level: high
+tags:
+    - apc
+    - kimsuky
+    - apt33
+    - attack.T1547.001
+    - attack.persistence
+    - attack.ta0003
+    - attack.privilege_escalation
+    - attack.ta0004
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection:
+        TargetObject|contains:
+            - '*\Software\Microsoft\Windows\CurrentVersion\Run*'
+            - '*'\Software\Microsoft\Windows\CurrentVersion\Run*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\RunOnce*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\RunOnceEx*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\RunServices*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Run*'
+            - '*\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit*'
+            - '*\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Shell*'
+            - '*\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Notify*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders*'
+            - '*\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders*'
+            - 'HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager*'
+    condition: selection
+falsepositives: 
+    - Legitimate software automatically (mostly, during installation) sets up autorun keys for legitimate reason
+    - Legitimate administrator sets up autorun keys for legitimate reason
