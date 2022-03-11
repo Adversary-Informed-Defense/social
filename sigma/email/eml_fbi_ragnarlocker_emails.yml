@@ -1,0 +1,37 @@
+title: March 2022 FBI FLASH RagnarLocker Ransomware IOCs
+id: fd4ba4db-132d-4c27-abfe-3bcfd3f952e7 
+status: experimental
+description: 'Detects IOCs associated with RagnarLocker ransomware deployment, based on FBI's March 2022 FLASH report.'
+author: Michael Morgan, Booz Allen's Adversary Informed Defense Team // bah_aid@bah.com
+references:
+  - https://www.ic3.gov/Media/News/2022/220307.pdf
+  - https://www.cisa.gov/uscert/ncas/current-activity/2022/03/08/fbi-releases-indicators-compromise-ragnarlocker-ransomware
+date: 2022/03/11
+modified: 
+logsource:
+  product: zeek
+  service: smtp
+detection:
+  selection:
+     mailfrom|contains: 
+    - 'ShingXuan7110@protonmail.com'
+    - 'scanjikoon@yahoo.com '
+    - 'alexeyberdin17@gmail.com'
+    - 'titan_fall572cool@gmail.com' 
+    - 'Vivopsalrozor@yahoo.com'
+    - 'Gamarjoba@mail.com'
+    - 'back.shadow98@gmail.com'
+    - 'michael.shawn.brown2@gmail.com'
+    - 'Alexey_Berdin@list.ru'
+    - 'sh0d44n@gmail.com'
+    - 'alexeyberdin437@gmail.com'
+    - 'alexeyberdin38@gmail.com'
+    - 'alexeyberbi@gmail.com'
+    
+  condition: 1 of selection 
+falsepositives:
+  - unknown
+level: High
+tags:
+  - attack.T1566
+  - attack.t1105
